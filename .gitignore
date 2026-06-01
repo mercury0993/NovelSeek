@@ -3,6 +3,7 @@
 *.aab
 *.ap_
 *.dex
+app/release/
 
 # Java class files
 *.class
@@ -33,6 +34,7 @@ captures/
 # Keystore files
 *.jks
 *.keystore
+**/keystore/
 
 # Google Services
 google-services.json
