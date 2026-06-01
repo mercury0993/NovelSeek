@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DeepSeek Blue Theme -->
+    <color name="primary">#4D6BFE</color>
+    <color name="primary_light">#6B85FE</color>
+    <color name="primary_dark">#3A54E0</color>
+
+    <color name="secondary">#6B7280</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#F9FAFB</color>
+    <color name="surface_variant">#F3F4F6</color>
+
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+
+    <color name="user_bubble">#4D6BFE</color>
+    <color name="ai_bubble">#F3F4F6</color>
+
+    <color name="error">#EF4444</color>
+    <color name="success">#10B981</color>
+
+    <!-- Dark theme colors -->
+    <color name="primary_dark_theme">#6B85FE</color>
+    <color name="background_dark_theme">#111827</color>
+    <color name="surface_dark_theme">#1F2937</color>
+    <color name="text_primary_dark_theme">#F9FAFB</color>
+    <color name="text_secondary_dark_theme">#9CA3AF</color>
+</resources>
