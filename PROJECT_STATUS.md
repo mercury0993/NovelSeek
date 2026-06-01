@@ -52,7 +52,6 @@ E:/lx/projects/NovelSeek/
       │  ├─ mipmap-xhdpi/                    # 96x96 图标
       │  ├─ mipmap-xxhdpi/                   # 144x144 图标
       │  ├─ mipmap-xxxhdpi/                  # 192x192 图标
-      │  ├─ mipmap-anydpi-v26/               # 自适应图标配置
       │  └─ values/                          # 主题、颜色定义
       └─ java/com/aichat/novel/
          ├─ MainActivity.kt                  # 主入口，Compose Navigation
@@ -95,7 +94,8 @@ E:/lx/projects/NovelSeek/
 - **上下文占用显示**：估算并显示当前对话的上下文 token 占用量及百分比
 - **模型选择**：支持 DeepSeek V4 Pro (1M) 和 V4 Flash (1M) 模型切换
 - **API 兼容**：符合 DeepSeek 官方 API 规范，支持 thinking 和 reasoning_effort 参数
-- **自适应图标**：支持 Android 8.0+ 自适应图标，包含各分辨率 PNG 回退
+- **自定义图标**：透明背景 PNG 图标，各分辨率适配（mdpi ~ xxxhdpi）
+- **复制功能**：AI 回复右下角复制按钮，一键复制到剪贴板
 
 ## 下一步（在 Android Studio 中）
 
@@ -108,6 +108,7 @@ E:/lx/projects/NovelSeek/
 ## 构建与发布
 
 - **GitHub 仓库**：https://github.com/mercury0993/NovelSeek
+- **最新发行版**：https://github.com/mercury0993/NovelSeek/releases/tag/v1.0.0
 - **构建方式**：Android Studio → Build → Build APK(s)
 - **APK 输出**：`app/build/outputs/apk/debug/app-debug.apk`
 - **签名密钥**：已在 .gitignore 中排除（*.jks, *.keystore）
