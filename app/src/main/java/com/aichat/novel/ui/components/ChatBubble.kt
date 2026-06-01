@@ -1,5 +1,9 @@
 package com.aichat.novel.ui.components
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,12 +13,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aichat.novel.ui.theme.NovelSeekColors
@@ -76,6 +84,7 @@ fun UserBubble(content: String) {
 fun AssistantBubble(content: String, reasoningContent: String? = null) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val maxBubbleWidth = screenWidth * 0.85f
+    val context = LocalContext.current
 
     var isReasoningExpanded by remember { mutableStateOf(false) }
 
@@ -144,6 +153,35 @@ fun AssistantBubble(content: String, reasoningContent: String? = null) {
                 content = content,
                 modifier = Modifier.padding(top = if (reasoningContent != null) 8.dp else 0.dp)
             )
+
+            // Copy button
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                IconButton(
+                    onClick = {
+                        copyToClipboard(context, content)
+                    },
+                    modifier = Modifier.size(32.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ContentCopy,
+                        contentDescription = "复制",
+                        tint = NovelSeekColors.TextSecondary,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+            }
         }
     }
+}
+
+private fun copyToClipboard(context: Context, text: String) {
+    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("novelseek_content", text)
+    clipboard.setPrimaryClip(clip)
+    Toast.makeText(context, "已复制到剪贴板", Toast.LENGTH_SHORT).show()
 }

@@ -1,6 +1,6 @@
 # NovelSeek 项目状态
 
-> 最后更新：2026-05-31
+> 最后更新：2026-06-01
 
 ## 项目概述
 
@@ -10,6 +10,7 @@ NovelSeek 是一款面向小说创作用户的 Android AI 聊天应用，对接 
 **最低兼容：** Android 8.0 (API 26)
 **支持模型：** DeepSeek V4 Pro (1M)、DeepSeek V4 Flash (1M)
 **API 兼容：** OpenAI API 格式，支持 thinking 和 reasoning_effort 参数
+**GitHub：** https://github.com/mercury0993/NovelSeek
 
 ## 实现状态：全部完成 ✅
 
@@ -36,7 +37,7 @@ E:/lx/projects/NovelSeek/
 ├─ build.gradle.kts                          # 项目级 Gradle (AGP 8.2.2, Kotlin 1.9.22)
 ├─ settings.gradle.kts                       # 仓库配置
 ├─ gradle.properties                         # Android 属性
-├─ gradle/wrapper/gradle-wrapper.properties  # Gradle 8.5
+├─ .gitignore                                # Git 忽略规则
 ├─ docs/
 │  ├─ superpowers/specs/...                  # 设计文档
 │  └─ superpowers/plans/...                  # 实现计划
@@ -44,6 +45,15 @@ E:/lx/projects/NovelSeek/
    ├─ build.gradle.kts                       # 依赖配置
    └─ src/main/
       ├─ AndroidManifest.xml                 # INTERNET 权限
+      ├─ res/
+      │  ├─ drawable/                        # 矢量图标（回退）
+      │  ├─ mipmap-mdpi/                     # 48x48 图标
+      │  ├─ mipmap-hdpi/                     # 72x72 图标
+      │  ├─ mipmap-xhdpi/                    # 96x96 图标
+      │  ├─ mipmap-xxhdpi/                   # 144x144 图标
+      │  ├─ mipmap-xxxhdpi/                  # 192x192 图标
+      │  ├─ mipmap-anydpi-v26/               # 自适应图标配置
+      │  └─ values/                          # 主题、颜色定义
       └─ java/com/aichat/novel/
          ├─ MainActivity.kt                  # 主入口，Compose Navigation
          ├─ NovelSeekApp.kt                  # Application，Room 初始化
@@ -51,7 +61,7 @@ E:/lx/projects/NovelSeek/
          │  ├─ AppPrefs.kt                   # DataStore (apiKey, deepThinking, systemPrompt, selectedModel)
          │  ├─ MessageData.kt                # API 请求/响应模型 + SSE 解析 + Usage 追踪
          │  └─ db/
-         │     ├─ AppDatabase.kt             # Room 数据库
+         │     ├─ AppDatabase.kt             # Room 数据库 + 迁移
          │     ├─ ConversationEntity.kt      # 对话实体
          │     ├─ MessageEntity.kt           # 消息实体
          │     ├─ ConversationDao.kt         # 对话 DAO
@@ -85,6 +95,7 @@ E:/lx/projects/NovelSeek/
 - **上下文占用显示**：估算并显示当前对话的上下文 token 占用量及百分比
 - **模型选择**：支持 DeepSeek V4 Pro (1M) 和 V4 Flash (1M) 模型切换
 - **API 兼容**：符合 DeepSeek 官方 API 规范，支持 thinking 和 reasoning_effort 参数
+- **自适应图标**：支持 Android 8.0+ 自适应图标，包含各分辨率 PNG 回退
 
 ## 下一步（在 Android Studio 中）
 
@@ -94,9 +105,17 @@ E:/lx/projects/NovelSeek/
 4. Build & Run
 5. 测试完整流程：配置 Key → 发消息 → 深度思考 → 多对话切换
 
+## 构建与发布
+
+- **GitHub 仓库**：https://github.com/mercury0993/NovelSeek
+- **构建方式**：Android Studio → Build → Build APK(s)
+- **APK 输出**：`app/build/outputs/apk/debug/app-debug.apk`
+- **签名密钥**：已在 .gitignore 中排除（*.jks, *.keystore）
+
 ## 注意事项
 
 - 需要有效的 DeepSeek API Key 才能使用
 - 流式输出依赖网络稳定性
 - Markdown 渲染使用 mikepenz multiplatform-markdown-renderer 库
 - 所有网络/数据操作均在协程中执行，不阻塞主线程
+- 自定义图标已生成各分辨率 PNG（mdpi ~ xxxhdpi）
